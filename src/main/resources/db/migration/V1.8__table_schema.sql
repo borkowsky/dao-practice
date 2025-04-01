@@ -1,0 +1,1 @@
+alter table luggage add column userId int not null references users(id);

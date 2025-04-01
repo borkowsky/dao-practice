@@ -1,0 +1,1 @@
+alter table staff add name character varying(255) not null;

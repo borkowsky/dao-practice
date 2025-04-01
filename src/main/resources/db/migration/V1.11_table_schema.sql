@@ -1,0 +1,1 @@
+create index if not exists tickets_user_id_idx on tickets (userId);

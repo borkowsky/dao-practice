@@ -1,0 +1,1 @@
+create index if not exists users_username_idx on users (username);
