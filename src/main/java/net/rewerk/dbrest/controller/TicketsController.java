@@ -15,6 +15,7 @@ import net.rewerk.dbrest.util.ServletUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/tickets")
 public class TicketsController extends HttpServlet {
@@ -36,6 +37,7 @@ public class TicketsController extends HttpServlet {
             if (id != null && id > 0) {
                 Ticket ticket = ticketDao.getById(id);
                 if (ticket != null) {
+                    ticket.getUser().setPassword(null);
                     result.add(ticket);
                 } else {
                     errors.add("Ticket with id " + id + " not found");
@@ -43,6 +45,11 @@ public class TicketsController extends HttpServlet {
                 }
             } else {
                 result = ticketDao.findByUserId(user.getId());
+                if (result != null && !result.isEmpty()) {
+                    result = result.stream()
+                            .peek(t -> t.getUser().setPassword(null))
+                            .collect(Collectors.toList());
+                }
             }
         }
         ServletUtil.sendPayloadResponse(resp, errors, result, statusCodes);
@@ -125,6 +132,7 @@ public class TicketsController extends HttpServlet {
                     .passport(user.getPassport())
                     .build();
             result = ticketDao.save(ticket);
+            ticket.getUser().setPassword(null);
         }
         ServletUtil.sendPayloadResponse(
                 resp,

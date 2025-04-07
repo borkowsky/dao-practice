@@ -4,8 +4,8 @@
   <groupId>net.rewerk</groupId>
   <artifactId>db-rest</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>db-rest Maven Webapp</name>
+  <version>2.0-BETA</version>
+  <name>Borkowsky Servlets APP</name>
   <url>https://maven.apache.org</url>
   <dependencies>
     <dependency>
