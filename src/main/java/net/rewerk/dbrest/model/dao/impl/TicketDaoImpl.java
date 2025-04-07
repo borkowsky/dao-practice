@@ -17,14 +17,12 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements TicketDao {
     @Override
     public List<Ticket> findByUserId(Long userId) {
         List<Ticket> result = new ArrayList<>();
-        EntityManager entityManager = ConnectionManager.getInstance().getEntityManager();
-        try {
+        try (EntityManager entityManager = ConnectionManager.getInstance().getEntityManager()) {
             TypedQuery<Ticket> query = entityManager.createNamedQuery("Ticket.findByUserId", Ticket.class);
             query.setParameter("userId", userId);
             result = query.getResultList();
         } catch (Exception e) {
             System.out.println("[TicketDaoImpl] findByUserId() Exception: " + e.getMessage());
-            e.printStackTrace();
         }
         return result;
     }

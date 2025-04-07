@@ -34,8 +34,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
                 entityManager.getTransaction().rollback();
                 System.out.println("[GenericDaoImpl] save() Transaction rolled back");
             }
-        } finally {
-            entityManager.close();
         }
         return result;
     }
@@ -53,15 +51,12 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
                 entityManager.getTransaction().commit();
                 result = true;
             }
-            entityManager.close();
         } catch (Exception e) {
             System.out.println("[GenericDaoImpl] delete() Exception: " + e.getMessage());
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
                 System.out.println("[GenericDaoImpl] delete() Transaction rolled back");
             }
-        } finally {
-            entityManager.close();
         }
         return result;
     }
@@ -70,10 +65,8 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     public boolean existsById(Long id) {
         if (id == null) return false;
         boolean result = false;
-        try {
-            EntityManager entityManager = ConnectionManager.getInstance().getEntityManager();
+        try (EntityManager entityManager = ConnectionManager.getInstance().getEntityManager()) {
             result = entityManager.find(entityClass, id) != null;
-            entityManager.close();
         } catch (Exception e) {
             System.out.println("[GenericDaoImpl] existsById() Exception: " + e.getMessage());
         }
