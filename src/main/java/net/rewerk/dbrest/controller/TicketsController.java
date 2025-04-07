@@ -82,7 +82,7 @@ public class TicketsController extends HttpServlet {
         }
         if (errors.isEmpty()) {
             try {
-                ticketClassEnum = TicketClass.valueOf(ticketClass.toUpperCase());
+                ticketClassEnum = TicketClass.valueOf(ticketClass.toLowerCase());
             } catch (Exception e) {
                 errors.add("Ticket class is invalid");
             }
@@ -121,7 +121,7 @@ public class TicketsController extends HttpServlet {
                     .route(route)
                     .staff(staff)
                     .luggage(luggage)
-                    .user(UserMapper.toDto(user))
+                    .user(user)
                     .passport(user.getPassport())
                     .build();
             result = ticketDao.save(ticket);

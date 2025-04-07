@@ -13,6 +13,8 @@ public interface TicketDao {
 
     Ticket getById(Long id);
 
+    List<Ticket> findByIds(List<Long> ids);
+
     List<Ticket> findAll();
 
     List<Ticket> findByUserId(Long userId);

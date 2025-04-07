@@ -48,7 +48,7 @@ public class AirplanesController extends HttpServlet {
             errors.add("Number is required");
         }
         if (staffIds == null || staffIds.length == 0) {
-            errors.add("RoleID is required");
+            errors.add("Staff IDs is required");
         }
         if (errors.isEmpty()) {
             StaffDao staffDao = new StaffDaoImpl();
@@ -66,10 +66,10 @@ public class AirplanesController extends HttpServlet {
                         .staff(staff)
                         .build();
                 result = airplaneDao.save(airplane);
+                if (result == null) {
+                    errors.add("Failed to save airplane");
+                }
             }
-        }
-        if (result == null) {
-            errors.add("Failed to save airplane");
         }
         ServletUtil.sendPayloadResponse(res,
                 errors,

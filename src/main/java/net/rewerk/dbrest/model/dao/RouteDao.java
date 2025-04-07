@@ -13,5 +13,7 @@ public interface RouteDao {
 
     Route getById(Long id);
 
+    List<Route> findByIds(List<Long> ids);
+
     List<Route> findAll();
 }

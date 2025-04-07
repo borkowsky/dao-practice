@@ -7,11 +7,13 @@ import java.util.List;
 public interface UserDao {
     User save(User user);
 
-    boolean delete(User user);
+    boolean delete(Long id);
 
     boolean existsById(Long id);
 
     User getById(Long id);
+
+    List<User> findByIds(List<Long> ids);
 
     List<User> findAll();
 

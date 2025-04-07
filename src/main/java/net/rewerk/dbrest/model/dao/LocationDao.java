@@ -11,6 +11,8 @@ public interface LocationDao {
 
     boolean existsById(Long id);
 
+    List<Location> findByIds(List<Long> ids);
+
     List<Location> findAll();
 
     Location getById(Long id);

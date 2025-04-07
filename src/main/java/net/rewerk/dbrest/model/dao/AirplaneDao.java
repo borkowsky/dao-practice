@@ -9,9 +9,11 @@ public interface AirplaneDao {
 
     boolean delete(Long id);
 
+    boolean existsById(Long id);
+
     Airplane getById(Long id);
 
-    boolean existsById(Long id);
+    List<Airplane> findByIds(List<Long> ids);
 
     List<Airplane> findAll();
 }

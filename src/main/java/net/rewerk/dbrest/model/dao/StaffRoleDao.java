@@ -11,6 +11,8 @@ public interface StaffRoleDao {
 
     boolean existsById(Long id);
 
+    List<StaffRole> findByIds(List<Long> ids);
+
     List<StaffRole> findAll();
 
     StaffRole getById(Long id);

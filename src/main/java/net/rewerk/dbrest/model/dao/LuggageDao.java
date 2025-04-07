@@ -13,5 +13,7 @@ public interface LuggageDao {
 
     Luggage getById(Long luggageId);
 
+    List<Luggage> findByIds(List<Long> ids);
+
     List<Luggage> findAll();
 }
