@@ -51,7 +51,10 @@ public class Ticket {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "staffId")
     private Staff staff;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "luggageId")
     private Luggage luggage;
     @CreationTimestamp
